@@ -1,0 +1,73 @@
+package Practicando;
+import java.util.Random;
+public class Matriz {
+int[][]m;
+
+public Matriz(int f,int c) {
+	super();
+	this.m = new int[f][c];
+}
+public Matriz(int[][] mu) {
+	// TODO Auto-generated constructor stub
+}
+public void GenerarMatriz() {
+	Random wil=new Random();
+	for (int i = 0; i < m.length; i++) {
+		for (int j = 0; j < m.length; j++) {
+			m[i][j]=wil.nextInt(10);
+		}
+	}
+}
+public void MostrarMatris(){
+	for (int i = 0; i < m.length; i++) {
+		for (int j = 0; j < m.length; j++) {
+			System.out.print(""+m[i][j]+"\t");
+		}
+		System.out.println();
+	}
+	System.out.println();
+}
+public Matriz Multiplicar(Matriz w) {
+    int mu[][] = new int [m.length][m[0].length];
+    for(int i = 0; i < m.length; i++){
+        for (int j = 0; j < m[0].length; j++){
+            for (int k = 0; k < m[0].length; k++){
+               m [i][j] += m[i][k] * w.m[k][j];
+            }
+        }
+    }
+
+    Matriz mul = new Matriz(m);
+	return mul;
+	
+}
+
+}
+////////////////////////////////////////////////////////////////
+package Practicando;
+
+import java.util.Scanner;
+
+public class VerMatriz {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+Scanner leer=new Scanner(System.in);
+System.out.println("ingresar filas");
+int f=leer.nextInt();
+System.out.println("ingresar columnas");
+int c=leer.nextInt();
+Matriz m1=new Matriz(f, c);
+m1.GenerarMatriz();
+m1.MostrarMatris();
+Matriz m2=new Matriz(f, c);
+m2.GenerarMatriz();
+m2.MostrarMatris();
+System.out.println("multiplicacion");
+Matriz mu=m1.Multiplicar(m2);
+
+
+
+	}
+
+}

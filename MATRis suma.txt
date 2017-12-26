@@ -1,0 +1,184 @@
+package Trabajo2;
+
+import java.util.Scanner;
+
+public class Matriz {
+
+	private double[][] elemento;
+
+	public Matriz() {
+		elemento = new double[10][10];
+	}
+
+	public Matriz(int m, int n) {
+		elemento = new double[m][n];
+	}
+
+	public Matriz(int m, int n, double v) {
+		elemento = new double[m][n];
+		rellena('v');
+	}
+
+	public Matriz(double[][] a) {
+		elemento = new double[a.length][a[0].length];
+		for (int i = 0; i < elemento.length; i++) {
+			for (int j = 0; j < elemento[0].length; j++) {
+				elemento[i][j] = a[i][j];
+			}
+		}
+	}
+
+	public Matriz Suma(Matriz a) {
+		Matriz re = null;
+		if (elemento.length == a.getNumeroFilas()
+				&& elemento[0].length == a.getNumeroColumnas()) {
+
+			double[][] mat = new double[elemento.length][elemento[0].length];
+			for (int i = 0; i < mat.length; i++) {
+				for (int j = 0; j < mat[0].length; j++) {
+					mat[i][j] = elemento[i][j] + a.get(i, j);
+				}
+			}
+			re = new Matriz(mat);
+		} else {
+			re = new Matriz(elemento);
+		}
+		return re;
+	}
+
+	public Matriz Multiplica(Matriz f) {
+		double[][] m = new double[elemento.length][f.getNumeroColumnas()];
+		if (elemento[0].length == f.getNumeroFilas()) {
+			for (int i = 0; i < elemento.length; i++) {
+				for (int j = 0; j < f.getNumeroFilas(); j++) {
+					for (int k = 0; k < elemento[0].length; k++) {
+						m[i][j] += elemento[i][k] * f.get(k, j);
+					}
+				}
+			}
+		}
+		Matriz mul = new Matriz(m);
+		return mul;
+	}
+
+	public int getNumeroFilas() {
+		return elemento.length;
+	}
+
+	public int getNumeroColumnas() {
+		return elemento[0].length;
+	}
+
+	public double get(int i, int j) {
+		return elemento[i][j];
+	}
+
+	public Object clone() {
+		double[][] r = (double[][]) elemento.clone();
+		Matriz re = new Matriz(r);
+		return re;
+	}
+
+	public String toString() {
+		String t = "";
+		t = "| ";
+		for (int i = 0; i < elemento.length; i++) {
+			t += "|";
+			for (int j = 0; j < elemento[0].length; j++) {
+				t += elemento[i][j] + " ";
+			}
+			t += "|" + "\n";
+		}
+		t += "|";
+		return t;
+	}
+
+	public boolean equals(Object w) {
+		Matriz ma = (Matriz) w;
+		boolean re = true;
+		for (int i = 0; i < elemento.length; i++) {
+			for (int j = 0; j < elemento[0].length; j++) {
+				re = re && (elemento[i][j] == ma.get(i, j));
+			}
+		}
+		return re;
+	}
+
+	public void rellena(char v) {
+		for (int i = 0; i < elemento.length; i++) {
+			for (int j = 0; j < elemento[0].length; j++) {
+				elemento[i][j] = 'v';
+			}
+		}
+	}
+
+	public static Matriz matrizIdentidad(int m) {
+		double[][] b = new double[m][m];
+		for (int i = 0; i < b.length; i++) {
+			for (int j = 0; j < b[0].length; j++) {
+				if (i == j) {
+					b[i][j] = 1;
+				}
+			}
+		}
+		Matriz re = new Matriz(b);
+		return re;
+	}
+
+	public static Matriz creaMatriz(int m, int n) {
+		Scanner s = new Scanner(System.in);
+		double[][] c = new double[m][n];
+		for (int i = 0; i < c.length; i++) {
+			for (int j = 0; j < c[0].length; j++) {
+				System.out.print("[" + (i + 1) + "][" + (i + 1) + "]=");
+				c[i][j] = s.nextDouble();
+			}
+		}
+		Matriz re = new Matriz(c);
+		return re;
+	}
+
+}
+/////////////////////////////////////////////////////////////////
+package Trabajo2;
+
+import java.util.Scanner;
+
+public class VerMatriz {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner leer = new Scanner(System.in);
+		Matriz ma = new Matriz();
+		System.out.println("matriz 1: " + ma);
+		System.out.println("ingrese numero de filas: ");
+		int f = leer.nextInt();
+		System.out.println("ingrese numero de columnas: ");
+		int c = leer.nextInt();
+		Matriz m1 = new Matriz(f, c);
+		System.out.println("matriz 2: " + m1);
+		System.out.println();
+		Matriz m2 = new Matriz(f, c, 5);
+		System.out.println();
+		System.out.println("matriz 3: " + m2);
+		Matriz s = m1.Suma(m2);
+		System.out.println();
+		System.out.println("suma: " + s);
+		Matriz mu = m1.Multiplica(m2);
+		System.out.println();
+		System.out.println("multiplicacion: " + mu);
+		System.out.println();
+		System.out.println("clonar m3: " + m2.clone());
+		System.out.println();
+		System.out.println("dos matrices iguales: " + m2.equals(m2));
+		System.out.println("orden de la  Matriz identidad: ");
+		int x = leer.nextInt();
+		System.out.println("Mariz identidad: " + Matriz.matrizIdentidad(x));
+		Matriz mcr = Matriz.creaMatriz(2, 2);
+		System.out.println("matriz creada: " + mcr);
+		leer.close();
+
+	}
+
+}

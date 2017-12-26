@@ -1,0 +1,130 @@
+package map;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Hashmap {
+
+	public static void main(String[] args) {
+		Scanner leer = new Scanner(System.in);
+		System.out.print("ingrese cantidad de elemntos");
+		int n = leer.nextInt();
+		HashMap<Integer, String> amigos = new HashMap<Integer, String>();
+		for (int i = 1; i <= n; i++) {
+			System.out.println(" ingrese nombre" + i + ":");
+			String nombre = leer.next();
+			System.out.println(" ingrese codigo" + i + ":");
+			Integer codigo = leer.nextInt();
+
+			amigos.put(codigo, nombre);
+
+		}
+		Set<Integer> claves = amigos.keySet();
+		Iterator<Integer> it = claves.iterator();// no pongo amigos xqmat no
+													// tiene iterator
+		while (it.hasNext()) {
+			Integer val = (Integer) it.next();// en val guardo primer valor
+			System.out.println(val + "\t" + amigos.get(val));// amigos .get con
+																// eso acedo al
+																// valor
+		}
+
+	}
+
+}
+**************************************************************************************************************************************
+package map;
+
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
+public class PruebaHashtable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Hashtable<Integer, String> amigos = new Hashtable<Integer, String>();
+		amigos.put(123, "Enrrique");
+		amigos.put(456, "Wilmer");
+		amigos.put(789, "Martin");
+		amigos.put(741, "Frank");
+		amigos.put(852, "frank");
+		amigos.put(159, "Eber");
+		amigos.put(888, "Jeiner");
+		amigos.put(795, "Frank");
+		amigos.put(234, "Carlos");
+		// nesesito sacar todas las claves
+		Set<Integer> Claves = amigos.keySet();
+		for (Iterator it = Claves.iterator(); it.hasNext();) {
+			Integer clave = (Integer) it.next();
+			System.out.println(clave + "\t" + amigos.get(clave));
+
+		}
+	}
+
+}
+***********************************************************************************************
+package map;
+
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Scanner;
+import java.util.Set;
+
+public class PruebalinkedhasMap {
+
+	public static void main(String[] args) {
+
+		Scanner leer = new Scanner(System.in);
+		System.out.print("ingrese cantidad de elemntos");
+		int n = leer.nextInt();
+		HashMap<Integer, String> amigos = new HashMap<Integer, String>();
+		for (int i = 1; i <= n; i++) {
+			System.out.println(" ingrese nombre" + i + ":");
+			String nombre = leer.next();
+			System.out.println(" ingrese codigo" + i + ":");
+			Integer codigo = leer.nextInt();
+
+			amigos.put(codigo, nombre);
+
+		}
+		Set<Integer> claves1 = amigos.keySet();
+		for (Iterator it = claves1.iterator(); it.hasNext();) {
+			Integer clave1 = (Integer) it.next();
+			System.out.println(claves1 + "\t" + amigos.get(clave1));
+		}
+
+		Hashtable<Integer, String> amigosdeclase = new Hashtable<Integer, String>();
+		amigosdeclase.put(123, "Enrrique");
+		amigosdeclase.put(456, "Wilmer");
+		amigosdeclase.put(789, "Martin");
+		amigosdeclase.put(741, "Frank");
+		amigosdeclase.put(852, "frank");
+		amigosdeclase.put(159, "Eber");
+		amigosdeclase.put(888, "Jeiner");
+		amigosdeclase.put(795, "Frank");
+		amigosdeclase.put(234, "Carlos");
+		Set<Integer> claves2 = amigosdeclase.keySet();
+		System.out.println("\nnlistado de amigos de clase");
+		for (Iterator it = claves2.iterator(); it.hasNext();) {
+			Integer clave2 = (Integer) it.next();
+			System.out.println(clave2 + "\t" + amigosdeclase.get(clave2));
+		}
+		LinkedHashMap<Integer, String> Misamiguitos = new LinkedHashMap<Integer, String>();
+		// quiero q esten todos los de hasmap y hashtable
+		Misamiguitos.putAll(amigos);
+		Misamiguitos.putAll(amigosdeclase);
+		Set<Integer> claves3 = Misamiguitos.keySet();
+		System.out.println("\nnlistado mi amiguitos");
+		for (Iterator it = claves3.iterator(); it.hasNext();) {
+			Integer clave3 = (Integer) it.next();
+			System.out.println(clave3 + "\t" + Misamiguitos.get(clave3));
+
+		}
+	}
+
+}
